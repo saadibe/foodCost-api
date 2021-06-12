@@ -1,5 +1,8 @@
 package com.restaurant.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.restaurant.demo.models.recipe.ElementComposeModel;
+import com.restaurant.demo.models.recipe.ProductComposeModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,8 +38,22 @@ public class ElementModel {
     )
     private List<CategoryModel> elementCategorys;
 
+    @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<ProductComposeModel> elementsNeededInProduct;
+
+    @OneToMany(mappedBy = "to_make", cascade = CascadeType.ALL)
+    private List<ElementComposeModel> recipe;
+
+    @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<ElementComposeModel> ingredients;
+
+
+
     @Column(nullable = false)
     private Double kg_price;
+
     private Double kg_buy_price;
     private Double kg_in_stock;
     public Double gramme_price;

@@ -1,5 +1,6 @@
 package com.restaurant.demo.models;
 
+import com.restaurant.demo.models.recipe.ProductComposeModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -64,4 +65,8 @@ public class ProductModel {
             inverseJoinColumns = @JoinColumn(name = "size")
     )
     private List<SizeCommodityModel>productSizes;
+
+
+    @OneToMany(mappedBy = "product_to_make", cascade = CascadeType.MERGE)
+    private List<ProductComposeModel> recipe;
 }
