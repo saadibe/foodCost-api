@@ -28,9 +28,6 @@ public class ProductModel {
     private String description;
 
     @Column(nullable = false)
-    private Integer total_stock;
-
-    @Column(nullable = false)
     private Double price;
 
     @Column(nullable = false)

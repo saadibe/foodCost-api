@@ -30,7 +30,7 @@ public class ProductComposeModel {
     private double grammes;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "product")
     @JsonIgnore
     private ProductModel product_to_make;
 

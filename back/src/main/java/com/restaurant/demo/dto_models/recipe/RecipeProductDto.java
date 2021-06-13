@@ -15,5 +15,5 @@ import java.io.Serializable;
 public class RecipeProductDto implements Serializable {
     public Long id;
     public Double grammes;
-    public RecipeIngredientDto element_need;
+    public RecipeIngredientDto ingredient;
 }

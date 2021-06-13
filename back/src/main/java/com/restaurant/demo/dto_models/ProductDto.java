@@ -28,7 +28,7 @@ public class ProductDto implements Serializable {
     public Integer popularity;
     public Integer rating;
     public Integer saled_times;
-    //public String image;
+    public String image;
     public List<RecipeProductDto> recipe;
     public List<CategoryModel> productCategorys = new ArrayList<>();
     public List<SizeCommodityModel>productSizes = new ArrayList<>();

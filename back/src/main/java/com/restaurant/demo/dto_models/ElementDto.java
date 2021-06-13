@@ -19,7 +19,7 @@ public class ElementDto implements Serializable {
     public String name;
     public List<CategoryModel> elementCategorys;
     public List<RecipeElementDto> recipe;
-    //public String image;
+    public String image;
     public Double kg_price;
     public Double gramme_price;
     public Double kg_buy_price;
