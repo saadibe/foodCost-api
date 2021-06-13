@@ -16,6 +16,12 @@ import java.util.List;
 @Getter
 @Setter
 public class CategoryModel {
+
+    public CategoryModel(Long id, String label){
+        this.id = id;
+        this.label = label;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

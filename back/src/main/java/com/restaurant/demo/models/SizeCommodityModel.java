@@ -17,12 +17,18 @@ import java.util.List;
 @Getter
 @Setter
 public class SizeCommodityModel {
+
+    public SizeCommodityModel(Long id, String label){
+        this.id = id;
+        this.label = label;
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String label = "Size";
+    private String label;
 
     @ManyToMany(mappedBy = "productSizes")
     @JsonIgnore

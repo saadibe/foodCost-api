@@ -1,6 +1,7 @@
 package com.restaurant.demo.dto_models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.restaurant.demo.dto_models.recipe.RecipeDto;
 import com.restaurant.demo.dto_models.recipe.RecipeProductDto;
 import com.restaurant.demo.models.CategoryModel;
 import com.restaurant.demo.models.SizeCommodityModel;
@@ -29,7 +30,7 @@ public class ProductDto implements Serializable {
     public Integer rating;
     public Integer saled_times;
     public String image;
-    public List<RecipeProductDto> recipe;
+    public List<RecipeDto> recipe;
     public List<CategoryModel> productCategorys = new ArrayList<>();
     public List<SizeCommodityModel>productSizes = new ArrayList<>();
 }

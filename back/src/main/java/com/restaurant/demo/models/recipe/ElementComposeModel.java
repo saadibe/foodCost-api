@@ -22,7 +22,7 @@ public class ElementComposeModel {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "element")
     private ElementModel to_make;
 
     @ManyToOne

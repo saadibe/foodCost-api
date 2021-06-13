@@ -48,11 +48,10 @@ public class ProductService {
         modelMapper.map(productDto, productModel);
         ProductModel res = productRepository.save(productModel);
         modelMapper.map(res, productDto);
-        return this.update(productDto);
+        return (productDto.recipe.size()>0)?this.update(productDto): productDto;
     }
 
     public ProductDto update(ProductDto productDto){
-        System.out.println(productDto.recipe);
         ProductModel productModel = productRepository.getById(productDto.id);
         StaticTools.copyNonNullProperties(productDto, productModel);
         productModel = setProductRecipe(productDto, productModel);

@@ -1,6 +1,7 @@
 package com.restaurant.demo.dto_models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.restaurant.demo.dto_models.recipe.RecipeDto;
 import com.restaurant.demo.dto_models.recipe.RecipeElementDto;
 import com.restaurant.demo.models.CategoryModel;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ public class ElementDto implements Serializable {
     public Long id;
     public String name;
     public List<CategoryModel> elementCategorys;
-    public List<RecipeElementDto> recipe;
+    public List<RecipeDto> recipe;
     public String image;
     public Double kg_price;
     public Double gramme_price;
