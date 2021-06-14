@@ -36,7 +36,7 @@ public class ProductService {
             ProductDto productDto = new ProductDto();
             modelMapper.map(product, productDto);
             Random ran = new Random();
-            productDto.total_stock = ran.nextInt(6) + 5;
+            productDto = calcTotalStock( productDto );
             list.add( productDto );
         });
         return list;
@@ -86,5 +86,22 @@ public class ProductService {
         productRepository.clearRecipeList(productModel.getId());
         productModel.setRecipe( new_recipe );
         return productModel;
+    }
+
+    ProductDto calcTotalStock(ProductDto product){
+        if( product.recipe.size() == 0 ){
+            product.total_stock = -1.;
+            return product;
+        }
+        List<Boolean> res = new ArrayList<>();
+        product.recipe.forEach(e->{
+            res.add( (e.grammes / 1000) <= e.ingredient.kg_in_stock );
+        });
+        double percent = 100 / res.size();
+        double stock = res.stream().mapToDouble(e -> (e) ? percent : 0.).sum();
+        stock = Math.round( stock );
+        System.out.println( stock );
+        product.total_stock = stock;
+        return product;
     }
 }

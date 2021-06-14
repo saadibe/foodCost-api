@@ -2,7 +2,6 @@ package com.restaurant.demo.dto_models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.restaurant.demo.dto_models.recipe.RecipeDto;
-import com.restaurant.demo.dto_models.recipe.RecipeElementDto;
 import com.restaurant.demo.models.CategoryModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -2,7 +2,6 @@ package com.restaurant.demo.dto_models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.restaurant.demo.dto_models.recipe.RecipeDto;
-import com.restaurant.demo.dto_models.recipe.RecipeProductDto;
 import com.restaurant.demo.models.CategoryModel;
 import com.restaurant.demo.models.SizeCommodityModel;
 import lombok.AllArgsConstructor;
@@ -22,7 +21,7 @@ public class ProductDto implements Serializable {
     public String name;
     public String type;
     public String description;
-    public Integer total_stock;
+    public Double total_stock;
     public Double price;
     public Double actual_price;
     public Integer discount;
