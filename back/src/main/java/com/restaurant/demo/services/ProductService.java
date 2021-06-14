@@ -100,7 +100,6 @@ public class ProductService {
         double percent = 100 / res.size();
         double stock = res.stream().mapToDouble(e -> (e) ? percent : 0.).sum();
         stock = Math.round( stock );
-        System.out.println( stock );
         product.total_stock = stock;
         return product;
     }

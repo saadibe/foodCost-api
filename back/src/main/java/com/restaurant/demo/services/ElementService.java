@@ -28,6 +28,7 @@ public class ElementService {
         elementRepository.findAll().forEach(element->{
             ElementDto elementDto = new ElementDto();
             modelMapper.map(element, elementDto);
+            elementDto = calcTotalStock( elementDto );
             list.add( elementDto );
         });
         return list;
@@ -70,5 +71,21 @@ public class ElementService {
         elementRepository.clearRecipeList(elementModel.getId());
         elementModel.setRecipe( new_recipe );
         return elementModel;
+    }
+
+    ElementDto calcTotalStock(ElementDto element){
+        if( element.recipe.size() == 0 ){
+            element.total_stock = -1.;
+            return element;
+        }
+        List<Boolean> res = new ArrayList<>();
+        element.recipe.forEach(e->{
+            res.add( (e.grammes / 1000) <= e.ingredient.kg_in_stock );
+        });
+        double percent = 100 / res.size();
+        double stock = res.stream().mapToDouble(e -> (e) ? percent : 0.).sum();
+        stock = Math.round( stock );
+        element.total_stock = stock;
+        return element;
     }
 }

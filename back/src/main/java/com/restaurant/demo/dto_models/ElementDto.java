@@ -24,5 +24,6 @@ public class ElementDto implements Serializable {
     public Double gramme_price;
     public Double kg_buy_price;
     public Double kg_in_stock;
+    public Double total_stock;
     public String description;
 }
