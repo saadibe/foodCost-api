@@ -20,10 +20,12 @@ public class CategorySizeController {
     public List<CategoryDto> findAllCategorys(){
         return categorySizeService.findAllCategorys();
     }
+
     @GetMapping("/size")
     public List<SizeDto> findAllSizes(){
         return categorySizeService.findAllSizes();
     }
+
     @GetMapping("/mix")
     public SizeCategoryDto mixSizeCategory(){
         return categorySizeService.mixSizeCategory();
@@ -60,4 +62,15 @@ public class CategorySizeController {
         categorySizeService.removeSize(id);
     }
 
+    /*-----------------Controls------------*/
+
+    @GetMapping("/category/{label}")
+    public boolean findCategoryByLabel(@PathVariable String label){
+        return categorySizeService.categoryLabelExist( label );
+    }
+
+    @GetMapping("/size/{label}")
+    public boolean findSizeByLabel(@PathVariable String label){
+        return categorySizeService.sizeLabelExist( label );
+    }
 }

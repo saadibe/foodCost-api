@@ -93,4 +93,13 @@ public class CategorySizeService {
         sizeRepository.deleteById( id );
     }
 
+
+    public boolean categoryLabelExist(String label){
+        return categorysRepository.findCategoryByLabel(label) != null;
+    }
+
+    public boolean sizeLabelExist(String label){
+        return sizeRepository.findSizeByLabel(label) != null;
+    }
+
 }

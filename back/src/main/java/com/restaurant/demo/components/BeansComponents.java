@@ -31,15 +31,15 @@ public class BeansComponents {
     public void makeAfterInit() {
 
         categorysRepository.saveAllAndFlush(Arrays.asList(
-                new CategoryModel( (long) 1, "small"),
-                new CategoryModel( (long) 2, "medium"),
-                new CategoryModel( (long) 3, "large")
+                new CategoryModel( (long) 1, "Salée"),
+                new CategoryModel( (long) 2, "Boisson"),
+                new CategoryModel( (long) 3, "Dessert")
         ));
 
         sizeRepository.saveAllAndFlush( Arrays.asList(
-                new SizeCommodityModel( (long)1, "Salée" ),
-                new SizeCommodityModel( (long)2, "Boisson" ),
-                new SizeCommodityModel( (long)3, "Dessert" )
+                new SizeCommodityModel( (long)1, "Small" ),
+                new SizeCommodityModel( (long)2, "Medium" ),
+                new SizeCommodityModel( (long)3, "Large" )
         ));
     }
 }
