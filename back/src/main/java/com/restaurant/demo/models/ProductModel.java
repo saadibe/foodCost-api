@@ -63,7 +63,11 @@ public class ProductModel {
     )
     private List<SizeCommodityModel>productSizes;
 
-
-    @OneToMany(mappedBy = "product_to_make", cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "products_items_recipe",
+            joinColumns = @JoinColumn(name = "product"),
+            inverseJoinColumns = @JoinColumn(name = "recipe_item")
+    )
     private List<ProductComposeModel> recipe;
 }

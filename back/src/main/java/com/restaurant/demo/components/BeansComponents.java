@@ -41,5 +41,7 @@ public class BeansComponents {
                 new SizeCommodityModel( (long)2, "Medium" ),
                 new SizeCommodityModel( (long)3, "Large" )
         ));
+
+
     }
 }

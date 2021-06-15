@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "element_recipe")
@@ -21,9 +22,8 @@ public class ElementComposeModel {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "element")
-    private ElementModel to_make;
+    @ManyToMany(mappedBy = "recipe")
+    private List<ElementModel> to_make;
 
     @ManyToOne
     @JoinColumn(nullable = false)

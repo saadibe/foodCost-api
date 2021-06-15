@@ -33,22 +33,22 @@ public class CategorySizeController {
 
     @PostMapping("/category")
     public CategoryDto createCategory(@RequestBody CategoryDto categoryDto){
-        return categorySizeService.createCategory(categoryDto);
+        return categorySizeService.createOrUpdateCategory(categoryDto);
     }
     @PostMapping("/size")
     public SizeDto createSize(@RequestBody SizeDto sizeDto){
-        return categorySizeService.createSize(sizeDto);
+        return categorySizeService.createOrUpdateSize(sizeDto);
     }
 
 
     @PutMapping("/category")
     public CategoryDto updateCategory(@RequestBody CategoryDto categoryDto){
-        return categorySizeService.updateCategory(categoryDto);
+        return categorySizeService.createOrUpdateCategory(categoryDto);
     }
 
     @PutMapping("/size")
     public SizeDto updateSize(@RequestBody SizeDto sizeDto){
-        return categorySizeService.updateSize(sizeDto);
+        return categorySizeService.createOrUpdateSize(sizeDto);
     }
 
 

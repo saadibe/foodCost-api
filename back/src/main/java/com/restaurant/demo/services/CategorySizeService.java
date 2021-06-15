@@ -1,6 +1,5 @@
 package com.restaurant.demo.services;
 
-import com.restaurant.demo.components.StaticTools;
 import com.restaurant.demo.dto_models.CategoryDto;
 import com.restaurant.demo.dto_models.SizeCategoryDto;
 import com.restaurant.demo.dto_models.SizeDto;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategorySizeService {
@@ -34,55 +34,28 @@ public class CategorySizeService {
     }
 
     public List<CategoryDto> findAllCategorys(){
-        List<CategoryDto> list = new ArrayList<>();
-        categorysRepository.findAll().forEach(category->{
-            CategoryDto categoryDto = new CategoryDto();
-            modelMapper.map(category, categoryDto);
-            list.add( categoryDto );
-        });
-        return list;
+        return categorysRepository.findAll().stream()
+                .map(e->modelMapper.map(e, CategoryDto.class))
+                .collect(Collectors.toList());
     }
 
     public List<SizeDto> findAllSizes(){
-        List<SizeDto> list = new ArrayList<>();
-        sizeRepository.findAll().forEach(size->{
-            SizeDto sizeDto = new SizeDto();
-            modelMapper.map(size, sizeDto);
-            list.add( sizeDto );
-        });
-        return list;
+        return sizeRepository.findAll().stream().map(e->modelMapper.map(e, SizeDto.class))
+                .collect(Collectors.toList());
     }
 
-    public CategoryDto createCategory(CategoryDto categoryDto){
-        CategoryModel elementModel = new CategoryModel();
-        modelMapper.map(categoryDto, elementModel);
-        CategoryModel res = categorysRepository.save(elementModel);
-        modelMapper.map(res, categoryDto);
-        return categoryDto;
+    public CategoryDto createOrUpdateCategory(CategoryDto categoryDto){
+        return modelMapper.map(
+                categorysRepository.save( modelMapper.map(categoryDto, CategoryModel.class) ),
+                CategoryDto.class
+        );
     }
 
-    public SizeDto createSize(SizeDto sizeDto){
-        SizeCommodityModel sizeModel = new SizeCommodityModel();
-        modelMapper.map(sizeDto, sizeModel);
-        SizeCommodityModel res = sizeRepository.save(sizeModel);
-        modelMapper.map(res, sizeDto);
-        return sizeDto;
-    }
-
-
-    public CategoryDto updateCategory(CategoryDto categoryDto){
-        CategoryModel categoryModel = categorysRepository.getById(categoryDto.id);
-        StaticTools.copyNonNullProperties(categoryDto, categoryModel);
-        CategoryModel newCategory = categorysRepository.save( categoryModel );
-        modelMapper.map(newCategory, categoryDto);
-        return categoryDto;
-    }
-    public SizeDto updateSize(SizeDto sizeDto){
-        SizeCommodityModel sizeModel = sizeRepository.getById(sizeDto.id);
-        StaticTools.copyNonNullProperties(sizeDto, sizeModel);
-        SizeCommodityModel newSize = sizeRepository.save( sizeModel );
-        modelMapper.map(newSize, sizeDto);
-        return sizeDto;
+    public SizeDto createOrUpdateSize(SizeDto sizeDto){
+        return modelMapper.map(
+                sizeRepository.save( modelMapper.map(sizeDto, SizeCommodityModel.class) ),
+                SizeDto.class
+        );
     }
 
     public void removeCategory(Long id){

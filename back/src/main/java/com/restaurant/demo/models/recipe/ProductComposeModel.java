@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "product_recipe")
@@ -29,9 +30,7 @@ public class ProductComposeModel {
     @Column(nullable = false)
     private double grammes;
 
-    @ManyToOne
-    @JoinColumn(name = "product")
-    @JsonIgnore
-    private ProductModel product_to_make;
+    @ManyToMany(mappedBy = "recipe")
+    private List<ProductModel> product_to_make;
 
 }

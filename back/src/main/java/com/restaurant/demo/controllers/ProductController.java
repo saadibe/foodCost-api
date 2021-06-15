@@ -23,12 +23,12 @@ public class ProductController {
 
     @PostMapping
     public ProductDto create(@RequestBody ProductDto productDto){
-        return this.productsService.create(productDto);
+        return this.productsService.createOrupdate(productDto);
     }
 
     @PutMapping
     public ProductDto update(@RequestBody ProductDto productDto){
-        return this.productsService.update(productDto);
+        return this.productsService.createOrupdate(productDto);
     }
 
     @DeleteMapping
@@ -36,9 +36,5 @@ public class ProductController {
         this.productsService.remove( id );
     }
 
-    @GetMapping("/categorys-sizes")
-    public SizeCategoryDto findSizeCategory(){
-        return productsService.findSizeCategory();
-    }
 
 }

@@ -20,29 +20,17 @@ public class ElementController {
     ElementRepository xx;
     @GetMapping
     public List<ElementDto> findAll(){
-        /*ElementModel m = new ElementModel();
-        m.setId((long)1);
-        ElementModel m2 = new ElementModel();
-        m2.setId((long)3);
-        ElementComposeModel e = new ElementComposeModel();
-        e.setGrammes(15);
-        e.setElement_need( m );
-        e.setElement_to_make( m2 );
-        List<ElementComposeModel> ss = m.getRecipe();
-        ss.add(e);
-        m.setRecipe( ss );
-        xx.save( m );*/
         return elementService.findAll();
     }
 
     @PostMapping
     public ElementDto create(@RequestBody ElementDto elementDto){
-        return this.elementService.create(elementDto);
+        return this.elementService.createOrupdate(elementDto);
     }
 
     @PutMapping
     public ElementDto update(@RequestBody ElementDto elementDto){
-        return this.elementService.update(elementDto);
+        return this.elementService.createOrupdate(elementDto);
     }
 
     @DeleteMapping
