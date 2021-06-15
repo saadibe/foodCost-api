@@ -42,7 +42,7 @@ public class ElementModel {
     @JsonIgnore
     private List<ProductComposeModel> elementsNeededInProduct;
 
-    @OneToMany(mappedBy = "to_make", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "to_make", cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     private List<ElementComposeModel> recipe;
 
     @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL)
