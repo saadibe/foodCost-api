@@ -1,6 +1,7 @@
 package com.restaurant.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.restaurant.demo.models.recipe.CustomRecipe;
 import com.restaurant.demo.models.recipe.ElementComposeModel;
 import com.restaurant.demo.models.recipe.ProductComposeModel;
 import lombok.AllArgsConstructor;
@@ -53,6 +54,11 @@ public class ElementModel {
     @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<ElementComposeModel> ingredients;
+
+
+    @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<CustomRecipe> construct_recipe;
 
 
 

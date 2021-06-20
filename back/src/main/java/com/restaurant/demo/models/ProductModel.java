@@ -1,5 +1,6 @@
 package com.restaurant.demo.models;
 
+import com.restaurant.demo.models.recipe.CustomRecipe;
 import com.restaurant.demo.models.recipe.ProductComposeModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,7 +41,6 @@ public class ProductModel {
     @Basic(fetch = FetchType.LAZY)
     private String image;
 
-    @Column(nullable = false)
     public Integer popularity = 0;
 
     public Integer rating = 0;
@@ -70,4 +70,8 @@ public class ProductModel {
             inverseJoinColumns = @JoinColumn(name = "recipe_item")
     )
     private List<ProductComposeModel> recipe;
+
+
+    @OneToMany(mappedBy = "product", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
+    private List<CustomRecipe> custom_recipe;
 }
