@@ -19,7 +19,7 @@ public class ConstructionController {
     List<ConstructionDto> findAll(){ return constructionService.findAll(); }
 
     @PostMapping
-    ConstructionDto create(@RequestBody ConstructionDto constructionDto){
-        return constructionService.create( constructionDto );
+    List<ConstructionDto> create(@RequestBody List<ConstructionDto> constructionDtos){
+        return constructionService.create( constructionDtos );
     }
 }

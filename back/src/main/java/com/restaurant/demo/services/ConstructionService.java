@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,16 +29,24 @@ public class ConstructionService {
         .collect(Collectors.toList());
     }
 
-    public ConstructionDto create(ConstructionDto constructionDto){
+    public List<ConstructionDto> create(List<ConstructionDto> constructionDtos){
+        List<ConstructionDto> constructionDtoList = new ArrayList<>();
+        constructionDtos.forEach(item->{
 
-        ConstructionModel constructionModel = modelMapper.map(constructionDto, ConstructionModel.class);
-        List<CustomRecipe> customRecipes = constructionModel.getCustomRecipes();
+            ConstructionModel constructionModel = modelMapper.map(item, ConstructionModel.class);
+            List<CustomRecipe> customRecipes = constructionModel.getCustomRecipes();
 
-        constructionModel = constructionRepository.save( constructionModel );
-        ConstructionModel finalConstructionModel = constructionModel;
+            constructionModel = constructionRepository.save( constructionModel );
+            ConstructionModel finalConstructionModel = constructionModel;
 
-        customRecipes.forEach(e->{e.setConstruction(finalConstructionModel);});
-        return modelMapper.map( constructionRepository.save(constructionModel), ConstructionDto.class);
+            customRecipes.forEach(e->{e.setConstruction(finalConstructionModel);});
+
+            ConstructionDto dto = modelMapper.map( constructionRepository.save(constructionModel), ConstructionDto.class);
+            constructionDtoList.add( dto );
+
+        });
+
+        return constructionDtoList;
     }
 
 }
