@@ -72,6 +72,6 @@ public class ProductModel {
     private List<ProductComposeModel> recipe;
 
 
-    @OneToMany(mappedBy = "product", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
+    @OneToMany(mappedBy = "product", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<CustomRecipe> custom_recipe;
 }

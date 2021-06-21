@@ -4,6 +4,7 @@ import com.restaurant.demo.dto_models.ConstructionDto;
 import com.restaurant.demo.dto_models.InvoiceDto;
 import com.restaurant.demo.dto_models.ProductDto;
 import com.restaurant.demo.dto_models.recipe.CustomRecipeDto;
+import com.restaurant.demo.dto_models.refrence.InvoiceRefDto;
 import com.restaurant.demo.models.ConstructionModel;
 import com.restaurant.demo.models.InvoiceModel;
 import com.restaurant.demo.models.ProductModel;
@@ -36,37 +37,21 @@ public class ConstructionService {
     }
 
     public InvoiceDto createAsInvoice(InvoiceDto invoiceDto){
-        /* CODE WILL BE UPDATED view to logic change*/
-        return null;
-        /*  --------------------------OLD CODE---------------------
-        List<ConstructionDto> constructionDtoList = new ArrayList<>();
-        InvoiceModel invoiceModel = new InvoiceModel();
-        invoiceModel.setCreated_at( constructionDtos.get(0).created_at );
-        constructionDtos.forEach(e->{
-            invoiceModel.setGlobal_discount(
-                    invoiceModel.getGlobal_discount() + e.discount
-            );
-            invoiceModel.setOld_price(
-                    invoiceModel.getOld_price() + e.old_price
-            );
-            invoiceModel.setFinal_price(
-                    invoiceModel.getFinal_price() + e.final_price
-            );
+        List<ConstructionDto> constructions = new ArrayList<>(invoiceDto.constructions);
+        invoiceDto.constructions.clear();
+        InvoiceModel invoiceModel = modelMapper.map( invoiceDto, InvoiceModel.class);
+        invoiceModel = invoiceRepository.save( invoiceModel );
+        InvoiceModel effectiveInvoice = invoiceModel;
+        constructions.forEach(e->{
+            e.setInvoice( new InvoiceRefDto(effectiveInvoice.getId()) );
         });
-        InvoiceModel invoiceRef = invoiceRepository.save( invoiceModel );
-
-        constructionDtos.forEach(item->{
-            ConstructionModel constructionModel = modelMapper.map(item, ConstructionModel.class);
-            List<CustomRecipe> customRecipes = constructionModel.getCustomRecipes();
-            constructionModel.setInvoice( invoiceRef );
-            constructionModel = constructionRepository.save( constructionModel );
-            ConstructionModel finalConstructionModel = constructionModel;
-            customRecipes.forEach(e->{e.setConstruction(finalConstructionModel);});
-            ConstructionDto dto = modelMapper.map( constructionRepository.save(constructionModel), ConstructionDto.class);
-            constructionDtoList.add( dto );
-        });
-
-        return constructionDtoList;*/
+        List<ConstructionModel> constructionModels = constructions.stream().map(e->{
+                e.invoice = new InvoiceRefDto(effectiveInvoice.getId() );
+                return modelMapper.map(e, ConstructionModel.class);
+        }).collect(Collectors.toList());
+        invoiceModel.setConstructions( constructionModels );
+        InvoiceDto resultDto = modelMapper.map( invoiceRepository.save( invoiceModel ), InvoiceDto.class );
+        return resultDto;
     }
 
 }

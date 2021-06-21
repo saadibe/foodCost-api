@@ -34,6 +34,6 @@ public class InvoiceModel {
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
 
-    @OneToMany(mappedBy = "invoice", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "invoice", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<ConstructionModel> constructions;
 }

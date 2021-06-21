@@ -24,7 +24,6 @@ public class ConstructionController {
 
     @PostMapping("/as-invoice")
     InvoiceDto create(@RequestBody InvoiceDto invoiceDto){
-        System.out.println(invoiceDto);
         return constructionService.createAsInvoice( invoiceDto );
     }
 }
