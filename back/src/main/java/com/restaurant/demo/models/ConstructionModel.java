@@ -27,11 +27,8 @@ public class ConstructionModel {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", shape = JsonFormat.Shape.STRING)
-    private LocalDateTime created_at;
-
     private String label;
-    private String qrcode;
+    private double old_price;
     private double final_price;
 
     private double discount;
@@ -40,5 +37,7 @@ public class ConstructionModel {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "construction", orphanRemoval = true)
     private List<CustomRecipe> customRecipes;
 
-    // not finished ...
+    @ManyToOne
+    private InvoiceModel invoice;
+
 }

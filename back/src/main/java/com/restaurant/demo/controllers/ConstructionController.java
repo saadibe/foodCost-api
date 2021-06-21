@@ -2,11 +2,15 @@ package com.restaurant.demo.controllers;
 
 
 import com.restaurant.demo.dto_models.ConstructionDto;
+import com.restaurant.demo.dto_models.InvoiceDto;
+import com.restaurant.demo.repositorys.InvoiceRepository;
 import com.restaurant.demo.services.ConstructionService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/construction")
@@ -18,8 +22,9 @@ public class ConstructionController {
     @GetMapping
     List<ConstructionDto> findAll(){ return constructionService.findAll(); }
 
-    @PostMapping
-    List<ConstructionDto> create(@RequestBody List<ConstructionDto> constructionDtos){
-        return constructionService.create( constructionDtos );
+    @PostMapping("/as-invoice")
+    InvoiceDto create(@RequestBody InvoiceDto invoiceDto){
+        System.out.println(invoiceDto);
+        return constructionService.createAsInvoice( invoiceDto );
     }
 }
